@@ -1,14 +1,21 @@
 package main
 
+// A simple example that shows how to render an animated progress bar. In this
+// example we bump the progress by 25% every two seconds, animating our
+// progress bar to its new target state.
+//
+// It's also possible to render a progress bar in a more static fashion without
+// transitions. For details on that approach see the progress-static example.
+
 import (
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
 	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 const (
@@ -16,33 +23,11 @@ const (
 	maxWidth = 80
 )
 
-type tickMsg time.Time
-
-type model struct {
-	progress     progress.Model
-	target       float64
-	stepDuration time.Duration
-	increment    float64
-}
+var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#626262")).Render
 
 func main() {
-	target, err := strconv.ParseFloat(os.Args[1], 64)
-	if err != nil || target < 0 || target > 1 {
-		fmt.Println("Invalid target value. Please provide a value between 0 and 1.")
-		return
-	}
-
-	durationMs, err := strconv.Atoi(os.Args[2])
-	if err != nil || durationMs <= 0 {
-		fmt.Println("Invalid duration. Please provide a positive integer in milliseconds.")
-		return
-	}
-
 	m := model{
-		progress:     progress.New(progress.WithDefaultGradient()),
-		target:       target,
-		stepDuration: time.Duration(durationMs) * time.Millisecond,
-		increment:    1.0 / (float64(durationMs) / 100), // 每 100ms 增加一次
+		progress: progress.New(progress.WithScaledGradient("#FF7CCB", "#FDFF8C")),
 	}
 
 	if _, err := tea.NewProgram(m).Run(); err != nil {
@@ -51,8 +36,14 @@ func main() {
 	}
 }
 
+type tickMsg time.Time
+
+type model struct {
+	progress progress.Model
+}
+
 func (m model) Init() tea.Cmd {
-	return tickCmd(m.stepDuration)
+	return tickCmd()
 }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -68,28 +59,35 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, nil
 
 	case tickMsg:
-		fmt.Println(m.progress.Percent(), m.target)
-		if m.progress.Percent() >= m.target {
+		if m.progress.Percent() == 1.0 {
 			return m, tea.Quit
 		}
-		cmd := m.progress.IncrPercent(m.increment)
-		return m, tea.Batch(tickCmd(m.stepDuration), cmd)
 
-	default:
+		// Note that you can also use progress.Model.SetPercent to set the
+		// percentage value explicitly, too.
+		cmd := m.progress.IncrPercent(0.25)
+		return m, tea.Batch(tickCmd(), cmd)
+
+	// FrameMsg is sent when the progress bar wants to animate itself
+	case progress.FrameMsg:
 		progressModel, cmd := m.progress.Update(msg)
 		m.progress = progressModel.(progress.Model)
 		return m, cmd
+
+	default:
+		return m, nil
 	}
 }
 
 func (m model) View() string {
 	pad := strings.Repeat(" ", padding)
 	return "\n" +
-		pad + m.progress.View() + "\n"
+		pad + m.progress.View() + "\n\n" +
+		pad + helpStyle("Press any key to quit")
 }
 
-func tickCmd(d time.Duration) tea.Cmd {
-	return tea.Tick(d, func(t time.Time) tea.Msg {
+func tickCmd() tea.Cmd {
+	return tea.Tick(time.Second*1, func(t time.Time) tea.Msg {
 		return tickMsg(t)
 	})
 }
