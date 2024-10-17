@@ -62,7 +62,7 @@ func main() {
 		return
 	}
 
-	initialModel := model{false, int(progressCurrentValue * 100), progressCurrentValue, false}
+	initialModel := model{false, int(math.Round(progressCurrentValue * 100)), progressCurrentValue, false}
 	p := tea.NewProgram(initialModel)
 	if _, err := p.Run(); err != nil {
 		fmt.Println("could not start program:", err)
