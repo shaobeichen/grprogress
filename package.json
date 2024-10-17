@@ -1,0 +1,15 @@
+{
+    "name": "grprogress",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node ./scripts/dev.js",
+        "dev:go": "go run . 0.5",
+        "build:go": "sh ./scripts/build.sh"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

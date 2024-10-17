@@ -8,7 +8,7 @@ for platform in "${platforms[@]}"; do
     IFS="/" read -r os arch <<< "$platform"
     
     # 设置输出文件名称
-    output="hello_${os}_${arch}"
+    output="grprogress_${os}_${arch}"
     if [ "$os" == "windows" ]; then
         output+=".exe"
     fi
