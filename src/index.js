@@ -1,5 +1,5 @@
-import { spawnSync } from 'child_process'
 import path from 'path'
+import { spawnSync } from 'child_process'
 
 export function update(current) {
   // 获取当前工作目录并构建完整路径
