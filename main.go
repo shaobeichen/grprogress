@@ -31,7 +31,8 @@ var (
 	// Gradient colors we'll use for the progress bar
 	ramp = makeRampStyles(progressColor1, progressColor2, progressBarWidth)
 
-	progressMaxValue float64 = 1
+	progressMaxValue     float64 = 1
+	progressCurrentValue float64 = 0
 )
 
 type model struct {
@@ -43,20 +44,25 @@ type model struct {
 
 func main() {
 	// Check if a command line argument is provided
-	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run . <progressMaxValue>")
+	if len(os.Args) != 3 {
+		fmt.Println("Usage: go run . <progressCurrentValue> <progressMaxValue>")
 		return
 	}
 
 	// Convert the argument to a float64
 	var err error
-	progressMaxValue, err = strconv.ParseFloat(os.Args[1], 64)
+	progressCurrentValue, err = strconv.ParseFloat(os.Args[1], 64)
+	if err != nil {
+		fmt.Println("Invalid progressMaxValue. It should be a number.")
+		return
+	}
+	progressMaxValue, err = strconv.ParseFloat(os.Args[2], 64)
 	if err != nil {
 		fmt.Println("Invalid progressMaxValue. It should be a number.")
 		return
 	}
 
-	initialModel := model{false, 0, 0, false}
+	initialModel := model{false, int(progressCurrentValue * 100), progressCurrentValue, false}
 	p := tea.NewProgram(initialModel)
 	if _, err := p.Run(); err != nil {
 		fmt.Println("could not start program:", err)
