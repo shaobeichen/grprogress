@@ -45,13 +45,17 @@ type model struct {
 func main() {
 	// Check if a command line argument is provided
 	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run . <progressCurrentValue> <progressMaxValue>")
+		fmt.Println("Usage: go run . <progressMaxValue>")
 		return
 	}
 
 	// Convert the argument to a float64
 	var err error
 	progressMaxValue, err = strconv.ParseFloat(os.Args[1], 64)
+	if progressMaxValue < 0 || progressMaxValue > 1 {
+		fmt.Println("Invalid progressMaxValue. progressMaxValue needs to be between 0 and 1.")
+		return
+	}
 	if err != nil {
 		fmt.Println("Invalid progressMaxValue. It should be a number.")
 		return
