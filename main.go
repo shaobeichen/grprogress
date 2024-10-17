@@ -110,7 +110,7 @@ func updateChosen(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 			if m.Progress >= progressMaxValue {
 				m.Progress = progressMaxValue
 				m.Loaded = true
-				return m, nil
+				return m, tea.Quit
 			}
 			return m, frame()
 		}
