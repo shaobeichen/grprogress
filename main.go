@@ -14,10 +14,12 @@ import (
 )
 
 const (
-	progressBarWidth  = 71
+	progressBarWidth  = 50
 	progressFullChar  = "█"
 	progressEmptyChar = "░"
-	dotChar           = " • "
+	progressColor1    = "#B14FFF"
+	progressColor2    = "#00FFA3"
+	progressMaxValue  = 1
 )
 
 // General stuff for styling the view
@@ -27,7 +29,7 @@ var (
 	mainStyle     = lipgloss.NewStyle().MarginLeft(2)
 
 	// Gradient colors we'll use for the progress bar
-	ramp = makeRampStyles("#B14FFF", "#00FFA3", progressBarWidth)
+	ramp = makeRampStyles(progressColor1, progressColor2, progressBarWidth)
 )
 
 type model struct {
@@ -84,8 +86,8 @@ func updateChosen(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 		if !m.Loaded {
 			m.Frames++
 			m.Progress = ease.Linear(float64(m.Frames) / float64(100))
-			if m.Progress >= 1 {
-				m.Progress = 1
+			if m.Progress >= progressMaxValue {
+				m.Progress = progressMaxValue
 				m.Loaded = true
 				return m, nil
 			}
