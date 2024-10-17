@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -19,7 +20,6 @@ const (
 	progressEmptyChar = "░"
 	progressColor1    = "#B14FFF"
 	progressColor2    = "#00FFA3"
-	progressMaxValue  = 1
 )
 
 // General stuff for styling the view
@@ -30,6 +30,8 @@ var (
 
 	// Gradient colors we'll use for the progress bar
 	ramp = makeRampStyles(progressColor1, progressColor2, progressBarWidth)
+
+	progressMaxValue float64 = 1
 )
 
 type model struct {
@@ -40,6 +42,20 @@ type model struct {
 }
 
 func main() {
+	// Check if a command line argument is provided
+	if len(os.Args) != 2 {
+		fmt.Println("Usage: go run . <progressMaxValue>")
+		return
+	}
+
+	// Convert the argument to a float64
+	var err error
+	progressMaxValue, err = strconv.ParseFloat(os.Args[1], 64)
+	if err != nil {
+		fmt.Println("Invalid progressMaxValue. It should be a number.")
+		return
+	}
+
 	initialModel := model{false, 0, 0, false}
 	p := tea.NewProgram(initialModel)
 	if _, err := p.Run(); err != nil {
@@ -85,7 +101,7 @@ func updateChosen(msg tea.Msg, m model) (tea.Model, tea.Cmd) {
 	case frameMsg:
 		if !m.Loaded {
 			m.Frames++
-			m.Progress = ease.Linear(float64(m.Frames) / float64(100))
+			m.Progress = ease.Linear(float64(m.Frames) / 100) // Adjusted the calculation for the new progressMaxValue
 			if m.Progress >= progressMaxValue {
 				m.Progress = progressMaxValue
 				m.Loaded = true
