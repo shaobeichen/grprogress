@@ -5,9 +5,10 @@
     "type": "module",
     "main": "./src/index.js",
     "scripts": {
+        "postinstall": "node install.js",
         "dev": "node ./src/dev.js",
         "dev:go": "go run . 0.5",
-        "build:go": "sh ./scripts/build.sh"
+        "build:go": "node ./scripts/build.js"
     },
     "keywords": [],
     "author": "shaobeichen"

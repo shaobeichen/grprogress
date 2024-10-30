@@ -1,0 +1,34 @@
+{
+    "name": "@grprogress/windows-amd64",
+    "version": "0.0.0",
+    "description": "a gradient progress for cli",
+    "main": "grprogress-windows-amd64.exe",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shaobeichen/grprogress.git"
+    },
+    "keywords": [
+        "github",
+        "go",
+        "cli",
+        "gradient",
+        "progress",
+        "gradient",
+        "bubbletea",
+        "bubble"
+    ],
+    "homepage": "https://github.com/shaobeichen/grprogress#readme",
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "files": [
+        "grprogress-windows-amd64.exe"
+    ],
+    "os": [
+        "windows"
+    ],
+    "cpu": [
+        "amd64"
+    ]
+}
