@@ -1,3 +1,5 @@
+// https://www.npmjs.com/package/esbuild?activeTab=code
+
 import https from 'https'
 
 function installUsingNPM(pkg, subpath, binPath) {
