@@ -1,3 +1,3 @@
 # grprogress
 
-a gradient progress for cli
+a gradient progress for nodejs by go

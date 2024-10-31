@@ -1,16 +1,10 @@
-// https://www.npmjs.com/package/esbuild?activeTab=code
+const fs = require('fs')
+const os = require('os')
+const path = require('path')
+const child_process = require('child_process')
+const data = require('./package.json')
 
-import fs from 'fs'
-import os from 'os'
-import path from 'path'
-import zlib from 'zlib'
-import child_process from 'child_process'
-import https from 'https'
-import { version as versionFromPackageJSON } from './package.json'
-import { fileURLToPath } from 'url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const versionFromPackageJSON = data.version
 
 const packages = {
   'darwin arm64': '@grprogress/darwin-arm64',
@@ -19,6 +13,9 @@ const packages = {
   'win32 x64': '@grprogress/windows-amd64',
 }
 
+/**
+ * 根据当前系统信息获取对应的包信息
+ */
 function getPackageInfoByCurrentPlatform() {
   const key = `${process.platform} ${os.arch()}`
   return {
@@ -27,95 +24,102 @@ function getPackageInfoByCurrentPlatform() {
   }
 }
 
-function fetch(url) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        if ((res.statusCode === 301 || res.statusCode === 302) && res.headers.location)
-          return fetch(res.headers.location).then(resolve, reject)
-        if (res.statusCode !== 200)
-          return reject(new Error(`Server responded with ${res.statusCode}`))
-        let chunks = []
-        res.on('data', (chunk) => chunks.push(chunk))
-        res.on('end', () => resolve(Buffer.concat(chunks)))
-      })
-      .on('error', reject)
-  })
+/**
+ * 日志格式化
+ */
+function log(msg) {
+  const text = `[grprogress] ${msg}`
+  const line = '='.repeat(text.length)
+  console.log(`
+  ${line}
+  ${text}
+  ${line}`)
 }
 
-function extractFileFromTarGzip(buffer, subpath) {
-  try {
-    buffer = zlib.unzipSync(buffer)
-  } catch (err) {
-    throw new Error(`Invalid gzip data in archive: ${(err && err.message) || err}`)
-  }
-  let str = (i, n) => String.fromCharCode(...buffer.subarray(i, i + n)).replace(/\0.*$/, '')
-  let offset = 0
-  subpath = `package/${subpath}`
-  while (offset < buffer.length) {
-    let name = str(offset, 100)
-    let size = parseInt(str(offset + 124, 12), 8)
-    offset += 512
-    if (!isNaN(size)) {
-      if (name === subpath) return buffer.subarray(offset, offset + size)
-      offset += (size + 511) & ~511
-    }
-  }
-  throw new Error(`Could not find ${JSON.stringify(subpath)} in archive`)
-}
-
-async function downloadDirectlyFromNPM(pkg, subpath, binPath) {
-  // https://registry.npmjs.com/@shaoo/cssoo/-/cssoo-2.2.0.tgz
-  const url = `https://registry.npmjs.org/${pkg}/-/${pkg.replace(
-    '@esbuild/',
-    '',
-  )}-${versionFromPackageJSON}.tgz`
-  try {
-    fs.writeFileSync(binPath, extractFileFromTarGzip(await fetch(url), subpath))
-    fs.chmodSync(binPath, 0o755)
-  } catch (e) {
-    throw e
-  }
-}
-
+/**
+ * 递归删除目录
+ * @param {string} dir 指定要删除的目录
+ */
 function removeRecursive(dir) {
   child_process.execSync(`rm -rf ${dir}`, {
-    cwd: installDir,
+    cwd: path.resolve(__dirname),
     stdio: 'inherit',
   })
 }
 
-function installUsingNPM(pkg, binFilename, binPath) {
+/**
+ * 通过npm安装指定包
+ * @param {string} pkg 包名
+ * @param {string} subpath 子路径，一般是包里的指定文件路径
+ * @param {string} binPath 指定文件迁移到的目标路径
+ */
+function installUsingNPM(pkg, subpath, binPath) {
   const tempDir = 'grprogress-npm-install'
   fs.mkdirSync(tempDir)
   const installDir = path.resolve(__dirname, tempDir)
+
   try {
     fs.writeFileSync(path.join(installDir, 'package.json'), '{}')
+
     child_process.execSync(`npm install ${pkg}@${versionFromPackageJSON} --save`, {
       cwd: installDir,
       stdio: 'inherit',
     })
-    const installedBinPath = path.join(installDir, 'node_modules', pkg, binFilename)
+
+    const installedBinPath = path.join(installDir, 'node_modules', pkg, subpath)
     fs.renameSync(installedBinPath, binPath)
   } catch (e) {
-    console.error('[grprogress] Failed to download and install from npm')
-    removeRecursive(installDir)
     throw e
+  }
+
+  removeRecursive(installDir)
+}
+
+/**
+ * 通过https下载tgz安装依赖
+ */
+function thirdInstall(pkg, subpath, binPath) {
+  // https://registry.npmjs.com/@grprogress/windows-amd64/-/windows-amd64-1.0.0.tgz
+  // 下载压缩包 -> 解压压缩包 -> 删除压缩包 -> 移动指定的文件 -> 删除文件夹
+}
+
+/**
+ * 通过npm安装依赖
+ */
+function secondInstall(pkg, subpath, binPath, fail) {
+  try {
+    installUsingNPM(pkg, subpath, binPath)
+  } catch (e) {
+    log('Failed to download and install from npm')
+    fail && fail()
+  }
+}
+
+/**
+ * 通过可选依赖项安装依赖
+ */
+function firstInstall(pkg, subpath, binPath, fail) {
+  try {
+    const installedBinPath = require.resolve(`${pkg}/${subpath}`)
+    fs.renameSync(installedBinPath, binPath)
+  } catch (e) {
+    log('Failed to download and install from optionalDependencies')
+    fail && fail()
   }
 }
 
 async function main() {
-  try {
-    const { packageName, platform } = getPackageInfoByCurrentPlatform()
-    const binFilename = 'grprogress'
-    const binFileFullName = platform === 'win32' ? binFilename + '.exe' : binFilename
-    const binPath = path.resolve(__dirname, binFileFullName)
-    installUsingNPM(packageName, binFileFullName, binPath)
-  } catch (e2) {
-    // try {
-    //   await downloadDirectlyFromNPM(pkg)
-    // } catch (e3) {}
-  }
+  const { packageName, platform } = getPackageInfoByCurrentPlatform()
+
+  const binFilename = 'grprogress'
+  const subpath = platform === 'win32' ? binFilename + '.exe' : binFilename
+  const binPath = path.resolve(__dirname, subpath)
+
+  firstInstall(packageName, subpath, binPath, () => {
+    secondInstall(packageName, subpath, binPath, () => {
+      thirdInstall(packageName, subpath, binPath)
+    })
+  })
 }
 
 main()
