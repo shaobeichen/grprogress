@@ -130,3 +130,6 @@ dist
 .pnp.*
 
 grprogress*
+
+npm/*
+!npm/package.json.template

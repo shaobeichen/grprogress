@@ -5,22 +5,32 @@
     "main": "./src/index.js",
     "scripts": {
         "postinstall": "node install.js",
-        "dev": "node ./src/dev.js",
+        "dev": "npm run build:dev && node ./src/dev.js",
         "dev:go": "go run . 0.5",
-        "build:go": "node ./scripts/build.js",
+        "build:dev": "node ./scripts/build-dev.js",
+        "build:prod": "node ./scripts/build-prod.js",
         "release": "node ./scripts/release.js"
     },
     "files": [
-        "install.js"
+        "install.js",
+        "src"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shaobeichen/grprogress.git"
+    },
+    "homepage": "https://github.com/shaobeichen/grprogress#readme",
+    "author": "shaobeichen",
     "keywords": [
         "progress",
         "progressbar",
         "progress-bar",
         "go",
-        "cli"
+        "cli",
+        "gradient",
+        "bubbletea",
+        "bubble"
     ],
-    "author": "shaobeichen",
     "optionalDependencies": {
         "@grprogress/darwin-arm64": "1.0.0",
         "@grprogress/darwin-amd64": "1.0.0",

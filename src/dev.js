@@ -1,3 +1,3 @@
-import { update } from './index.js'
+const { update } = require('./index')
 
 update(1)

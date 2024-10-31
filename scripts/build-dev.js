@@ -4,7 +4,7 @@ const platforms = ['darwin/arm64', 'darwin/amd64', 'linux/amd64', 'windows/amd64
 
 platforms.forEach((platform) => {
   const [os, arch] = platform.split('/')
-  let output = `npm/${os}-${arch}/grprogress-${os}-${arch}`
+  let output = `npm/${os}-${arch}/grprogress`
 
   if (os === 'windows') output += '.exe'
 
