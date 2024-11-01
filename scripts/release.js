@@ -32,7 +32,7 @@ try {
         console.log(`正在发布 ${folder}...`)
         try {
           // 执行 npm publish
-          execSync('npm publish', {
+          execSync('npm publish --access public', {
             cwd: folderPath,
             stdio: 'inherit',
           })
