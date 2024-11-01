@@ -8,8 +8,8 @@ try {
   // 获取子文件夹
   const folders = fs.readdirSync(npmDir)
 
-  // 获取 npm 令牌
-  const npmToken = process.env.NPM_TOKEN // 从环境变量中获取 npm token
+  // 从环境变量中获取 npm token
+  const npmToken = process.env.NPM_TOKEN
 
   if (!npmToken) {
     console.error('请确保设置 NPM_TOKEN 环境变量。')
