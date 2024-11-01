@@ -15,11 +15,13 @@ try {
     process.exit(1)
   }
 
-  // 创建 .npmrc 文件
-  const npmrcPath = path.join(__dirname, '../.npmrc')
-  fs.writeFileSync(npmrcPath, `//registry.npmjs.org/:_authToken=${npmToken}`)
-
-  console.warn(1111, fs.readFileSync(npmrcPath, 'utf-8'))
+  execSync(
+    `npm login --registry=https://registry.npmjs.org/ --scope=@grprogress --auth-type=legacy --token=${NPM_TOKEN}`,
+    {
+      cwd: npmDir,
+      stdio: 'inherit',
+    },
+  )
 
   // 遍历每个子文件夹
   folders.forEach((folder) => {
