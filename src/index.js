@@ -2,11 +2,10 @@ const path = require('path')
 const { spawnSync } = require('child_process')
 const utils = require('../utils/index')
 
-const { dirName, platform } = utils.getPackageInfoByCurrentPlatform()
-const npmPath = path.join(__dirname, '../npm')
-const childPackageDir = path.join(npmPath, dirName)
+const { platform } = utils.getPackageInfoByCurrentPlatform()
+const npmPath = path.join(__dirname, '../')
 const binName = platform === 'win32' ? 'grprogress.exe' : 'grprogress'
-const childPackageBinName = path.join(childPackageDir, binName)
+const childPackageBinName = path.join(npmPath, binName)
 
 function update(current) {
   const command = childPackageBinName
