@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/shaobeichen/grprogress/compare/v1.2.0...v1.3.0) (2024-11-01)
+
+
+### Features
+
+* update release scripts ([74d070c](https://github.com/shaobeichen/grprogress/commit/74d070cf22a4d28d3455a6a0888919c44a227e53))
+
 # [1.2.0](https://github.com/shaobeichen/grprogress/compare/v1.1.0...v1.2.0) (2024-11-01)
 
 
