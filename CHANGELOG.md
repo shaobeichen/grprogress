@@ -1,3 +1,10 @@
+## [1.4.11](https://github.com/shaobeichen/grprogress/compare/v1.4.10...v1.4.11) (2024-11-01)
+
+
+### Bug Fixes
+
+* update core run path ([cdbcc23](https://github.com/shaobeichen/grprogress/commit/cdbcc23df3acde517cd4b350fa67a76040302a52))
+
 ## [1.4.10](https://github.com/shaobeichen/grprogress/compare/v1.4.9...v1.4.10) (2024-11-01)
 
 
