@@ -14,7 +14,7 @@ const npmPath = path.join(__dirname, '../npm')
 
 platforms.forEach((platform) => {
   const [GOOS, GOARCH] = platform.goPlatform.split('/')
-  const [realOs, realArch] = platform.goPlatform.split('/')
+  const [realOs, realArch] = platform.realPlatform.split('/')
 
   const childPackageName = `${realOs}-${realArch}`
   const childPackageDir = path.join(npmPath, childPackageName)
@@ -54,14 +54,14 @@ platforms.forEach((platform) => {
     },
     (error, stdout, stderr) => {
       if (error) {
-        console.error(`[error]: ${platform} ${error.message}`)
+        console.error(`[error]: ${platform.realPlatform} ${error.message}`)
         return
       }
       if (stderr) {
-        console.error(`[stderr]: ${platform} ${stderr}`)
+        console.error(`[stderr]: ${platform.realPlatform} ${stderr}`)
         return
       }
-      console.log(`[success]: ${platform} ${stdout}`)
+      console.log(`[success]: ${platform.realPlatform} ${stdout}`)
     },
   )
 })
