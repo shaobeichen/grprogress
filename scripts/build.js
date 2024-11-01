@@ -29,8 +29,8 @@ platforms.forEach((platform) => {
     name: '@grprogress/' + childPackageName,
     version: process.argv[2] || version,
     file: binName,
-    os,
-    cpu: arch,
+    os: realOs,
+    cpu: realArch,
   }
 
   Object.keys(replaceMap).forEach((key) => {
