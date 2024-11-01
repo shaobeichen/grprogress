@@ -8,19 +8,15 @@ try {
   // 获取子文件夹
   const folders = fs.readdirSync(npmDir)
 
-  // 设置 npm 认证 token
   const npmToken = process.env.NPM_TOKEN // 从环境变量中获取 token
-  if (npmToken) {
-    const npmrcPath = path.join(__dirname, '../.npmrc')
-    fs.writeFileSync(npmrcPath, `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}`)
-  } else {
+  if (!npmToken) {
     console.error('请设置 NPM_TOKEN 环境变量.')
     process.exit(1)
   }
 
-  execSync(`npm adduser --scope=@grprogress`, {
-    stdio: 'inherit',
-  })
+  // 创建 .npmrc 文件
+  const npmrcPath = path.join(__dirname, '../.npmrc')
+  fs.writeFileSync(npmrcPath, `//registry.npmjs.org/:_authToken=${npmToken}`)
 
   // 遍历每个子文件夹
   folders.forEach((folder) => {
