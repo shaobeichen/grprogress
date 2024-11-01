@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/shaobeichen/grprogress/compare/v1.4.11...v1.4.12) (2024-11-01)
+
+
+### Bug Fixes
+
+* add time log ([660b389](https://github.com/shaobeichen/grprogress/commit/660b389c5eb4f5c29f3f3f1db397233b3f72e6b4))
+
 ## [1.4.11](https://github.com/shaobeichen/grprogress/compare/v1.4.10...v1.4.11) (2024-11-01)
 
 
