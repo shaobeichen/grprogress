@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/shaobeichen/grprogress/compare/v1.4.7...v1.4.8) (2024-11-01)
+
+
+### Bug Fixes
+
+* update release scripts ([89059f8](https://github.com/shaobeichen/grprogress/commit/89059f888c5e38673c77a1cdec53a8e9a8c3ecc0))
+
 ## [1.4.7](https://github.com/shaobeichen/grprogress/compare/v1.4.6...v1.4.7) (2024-11-01)
 
 
