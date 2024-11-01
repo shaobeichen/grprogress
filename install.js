@@ -1,28 +1,10 @@
 const fs = require('fs')
-const os = require('os')
 const path = require('path')
 const child_process = require('child_process')
 const data = require('./package.json')
+const utils = require('./utils')
 
 const versionFromPackageJSON = data.version
-
-const packages = {
-  'darwin arm64': '@grprogress/darwin-arm64',
-  'darwin x64': '@grprogress/darwin-amd64',
-  'linux x64': '@grprogress/linux-amd64',
-  'win32 x64': '@grprogress/windows-amd64',
-}
-
-/**
- * 根据当前系统信息获取对应的包信息
- */
-function getPackageInfoByCurrentPlatform() {
-  const key = `${process.platform} ${os.arch()}`
-  return {
-    packageName: packages[key],
-    platform: process.platform,
-  }
-}
 
 /**
  * 日志格式化
@@ -109,7 +91,7 @@ function firstInstall(pkg, subpath, binPath, fail) {
 }
 
 async function main() {
-  const { packageName, platform } = getPackageInfoByCurrentPlatform()
+  const { packageName, platform } = utils.getPackageInfoByCurrentPlatform()
 
   const binFilename = 'grprogress'
   const subpath = platform === 'win32' ? binFilename + '.exe' : binFilename

@@ -1,3 +1,3 @@
-const { update } = require('./index')
+const grprogress = require('./index')
 
-update(1)
+grprogress.update(0.8)

@@ -5,15 +5,14 @@
     "main": "./src/index.js",
     "scripts": {
         "postinstall": "node install.js",
-        "dev": "npm run build:dev && node ./src/dev.js",
-        "dev:go": "go run . 0.5",
-        "build:dev": "node ./scripts/build-dev.js",
-        "build:prod": "node ./scripts/build-prod.js",
-        "release": "node ./scripts/release.js"
+        "dev": "npm run build && node ./src/dev.js",
+        "dev:go": "go run . 0.8",
+        "build": "node ./scripts/build.js"
     },
     "files": [
         "install.js",
-        "src"
+        "src",
+        "utils"
     ],
     "repository": {
         "type": "git",
@@ -36,5 +35,15 @@
         "@grprogress/darwin-amd64": "1.0.0",
         "@grprogress/linux-amd64": "1.0.0",
         "@grprogress/windows-amd64x64": "1.0.0"
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/commit-analyzer": "^13.0.0",
+        "@semantic-release/exec": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/github": "^10.3.4",
+        "@semantic-release/npm": "^12.0.1",
+        "@semantic-release/release-notes-generator": "^14.0.1",
+        "semantic-release": "^24.1.1"
     }
 }

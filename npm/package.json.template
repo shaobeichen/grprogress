@@ -1,10 +1,10 @@
 {
-    "name": "${name}",
-    "version": "${version}",
+    "name": "{{name}}",
+    "version": "{{version}}",
     "description": "a gradient progress for nodejs by go",
-    "main": "${file}",
+    "main": "{{file}}",
     "files": [
-        "${file}"
+        "{{file}}"
     ],
     "repository": {
         "type": "git",
@@ -23,9 +23,9 @@
         "bubble"
     ],
     "os": [
-        "${os}"
+        "{{os}}"
     ],
     "cpu": [
-        "${cpu}"
+        "{{cpu}}"
     ]
 }
