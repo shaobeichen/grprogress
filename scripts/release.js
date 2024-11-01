@@ -19,6 +19,8 @@ try {
   const npmrcPath = path.join(__dirname, '../.npmrc')
   fs.writeFileSync(npmrcPath, `//registry.npmjs.org/:_authToken=${npmToken}`)
 
+  console.warn(1111, fs.readFileSync(npmrcPath, 'utf-8'))
+
   // 遍历每个子文件夹
   folders.forEach((folder) => {
     const folderPath = path.join(npmDir, folder)
