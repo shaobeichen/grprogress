@@ -43,13 +43,17 @@ function installUsingNPM(pkg, subpath, binPath) {
   try {
     fs.writeFileSync(path.join(installDir, 'package.json'), '{}')
 
+    console.time('文件下载时间')
     child_process.execSync(`npm install ${pkg}@${versionFromPackageJSON} --save`, {
       cwd: installDir,
       stdio: 'inherit',
     })
+    console.timeEnd('文件下载时间')
 
+    console.time('文件移动时间')
     const installedBinPath = path.join(installDir, 'node_modules', pkg, subpath)
     fs.renameSync(installedBinPath, binPath)
+    console.timeEnd('文件移动时间')
   } catch (e) {
     throw e
   }
