@@ -3,16 +3,22 @@ const path = require('path')
 const { exec } = require('child_process')
 const { version } = require('../package.json')
 
-const platforms = ['windows/amd64', 'darwin/amd64', 'darwin/arm64', 'linux/amd64']
+const platforms = [
+  { realPlatform: 'win32/x64', goPlatform: 'windows/amd64' },
+  { realPlatform: 'darwin/x64', goPlatform: 'darwin/amd64' },
+  { realPlatform: 'darwin/arm64', goPlatform: 'darwin/arm64' },
+  { realPlatform: 'linux/x64', goPlatform: 'linux/amd64' },
+]
 
 const npmPath = path.join(__dirname, '../npm')
 
 platforms.forEach((platform) => {
-  const [os, arch] = platform.split('/')
+  const [GOOS, GOARCH] = platform.goPlatform.split('/')
+  const [realOs, realArch] = platform.goPlatform.split('/')
 
-  const childPackageName = `${os}-${arch}`
+  const childPackageName = `${realOs}-${realArch}`
   const childPackageDir = path.join(npmPath, childPackageName)
-  const binName = os === 'windows' ? 'grprogress.exe' : 'grprogress'
+  const binName = realOs === 'win32' ? 'grprogress.exe' : 'grprogress'
   const childPackageBinName = path.join(childPackageDir, binName)
   if (!fs.existsSync(childPackageDir)) fs.mkdirSync(childPackageDir)
 
@@ -42,8 +48,8 @@ platforms.forEach((platform) => {
     {
       env: {
         ...process.env,
-        GOOS: os,
-        GOARCH: arch,
+        GOOS,
+        GOARCH,
       },
     },
     (error, stdout, stderr) => {
