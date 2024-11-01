@@ -19,6 +19,10 @@ try {
     process.exit(1)
   }
 
+  execSync(`npm adduser --scope=@grprogress`, {
+    stdio: 'inherit',
+  })
+
   // 遍历每个子文件夹
   folders.forEach((folder) => {
     const folderPath = path.join(npmDir, folder)
