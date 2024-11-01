@@ -16,7 +16,7 @@ try {
   }
 
   execSync(
-    `npm login --registry=https://registry.npmjs.org/ --scope=@grprogress --auth-type=legacy --token=${NPM_TOKEN}`,
+    `npm login --registry=https://registry.npmjs.org/ --scope=@grprogress --auth-type=legacy --token=${npmToken}`,
     {
       cwd: npmDir,
       stdio: 'inherit',
