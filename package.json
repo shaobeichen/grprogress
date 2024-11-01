@@ -2,6 +2,7 @@
     "name": "grprogress",
     "version": "1.2.0",
     "description": "a gradient progress for nodejs by go",
+    "private": false,
     "main": "./src/index.js",
     "scripts": {
         "postinstall": "node install.js",

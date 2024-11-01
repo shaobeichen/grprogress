@@ -2,6 +2,7 @@
     "name": "{{name}}",
     "version": "{{version}}",
     "description": "a gradient progress for nodejs by go",
+    "private": false,
     "main": "{{file}}",
     "files": [
         "{{file}}"
