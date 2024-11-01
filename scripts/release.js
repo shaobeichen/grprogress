@@ -8,20 +8,13 @@ try {
   // 获取子文件夹
   const folders = fs.readdirSync(npmDir)
 
-  // 从环境变量中获取 token
-  const npmToken = process.env.NPM_TOKEN
+  // 获取 npm 令牌
+  const npmToken = process.env.NPM_TOKEN // 从环境变量中获取 npm token
+
   if (!npmToken) {
-    console.error('请设置 NPM_TOKEN 环境变量.')
+    console.error('请确保设置 NPM_TOKEN 环境变量。')
     process.exit(1)
   }
-
-  execSync(
-    `npm login --registry=https://registry.npmjs.org/ --scope=@grprogress --auth-type=legacy --token=${npmToken}`,
-    {
-      cwd: npmDir,
-      stdio: 'inherit',
-    },
-  )
 
   // 遍历每个子文件夹
   folders.forEach((folder) => {
@@ -36,10 +29,13 @@ try {
         console.log(`正在发布 ${folder}...`)
         try {
           // 执行 npm publish
-          execSync('npm publish --access public', {
-            cwd: folderPath,
-            stdio: 'inherit',
-          })
+          execSync(
+            `npm publish --access public --scope=@grprogress --//registry.npmjs.org/:_authToken=${npmToken}`,
+            {
+              cwd: folderPath,
+              stdio: 'inherit',
+            },
+          )
           console.log(`发布 ${folder} 成功!`)
         } catch (err) {
           console.error(`发布 ${folder} 失败:`, err.message)
