@@ -1,6 +1,6 @@
 {
     "name": "grprogress",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "a gradient progress for nodejs by go",
     "main": "./src/index.js",
     "scripts": {
