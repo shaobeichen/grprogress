@@ -30,7 +30,7 @@ try {
         try {
           // 执行 npm publish
           execSync(
-            `npm publish --access public --scope=@grprogress --//registry.npmjs.org/:_authToken=${npmToken}`,
+            `npm publish --access public --scope=@grprogress --//registry.npmjs.org/:_authToken=${npmToken} --loglevel verbose`,
             {
               cwd: folderPath,
               stdio: 'inherit',
