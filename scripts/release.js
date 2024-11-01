@@ -4,7 +4,7 @@ const { execSync } = require('child_process')
 
 try {
   // npm 文件夹路径
-  const npmDir = path.join(__dirname, 'npm')
+  const npmDir = path.join(__dirname, '../npm')
   // 获取子文件夹
   const folders = fs.readdirSync(npmDir)
 
