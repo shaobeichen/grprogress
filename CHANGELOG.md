@@ -1,3 +1,10 @@
+## [1.4.13](https://github.com/shaobeichen/grprogress/compare/v1.4.12...v1.4.13) (2024-11-02)
+
+
+### Bug Fixes
+
+* handle optionalDependencies package name error ([7fb36dc](https://github.com/shaobeichen/grprogress/commit/7fb36dcb3dc55ae525a1bdf640ea424d2be0a54f))
+
 ## [1.4.12](https://github.com/shaobeichen/grprogress/compare/v1.4.11...v1.4.12) (2024-11-01)
 
 
