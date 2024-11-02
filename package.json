@@ -33,9 +33,9 @@
     ],
     "optionalDependencies": {
         "@grprogress/darwin-arm64": "1.0.0",
-        "@grprogress/darwin-amd64": "1.0.0",
-        "@grprogress/linux-amd64": "1.0.0",
-        "@grprogress/windows-amd64x64": "1.0.0"
+        "@grprogress/darwin-x64": "1.0.0",
+        "@grprogress/linux-x64": "1.0.0",
+        "@grprogress/win32-x64": "1.0.0"
     },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
