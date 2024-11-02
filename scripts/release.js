@@ -16,6 +16,8 @@ function updatePackageOptionalDependencies() {
   packageJson.optionalDependencies = Object.fromEntries(
     packages.map((name) => [name, currentVersion]),
   )
+
+  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 4), 'utf8')
 }
 
 function publishChildPackage() {
