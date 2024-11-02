@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/shaobeichen/grprogress/compare/v1.4.13...v1.5.0) (2024-11-02)
+
+
+### Features
+
+* update optionalDependencies package name ([1335ca6](https://github.com/shaobeichen/grprogress/commit/1335ca6f45692bd034aec036b27c732d1c1738af))
+
 ## [1.4.13](https://github.com/shaobeichen/grprogress/compare/v1.4.12...v1.4.13) (2024-11-02)
 
 
