@@ -13,7 +13,8 @@ module.exports = {
       '@semantic-release/exec',
       {
         // 这里可以运行你的自定义脚本
-        prepareCmd: 'node ./scripts/build.js ${nextRelease.version} && node ./scripts/release.js',
+        prepareCmd:
+          'node ./scripts/build.js ${nextRelease.version} && node ./scripts/release.js ${nextRelease.version}',
       },
     ],
     '@semantic-release/npm', // 用来更新 package.json 的，如果不需要发到 npm 可以设 npmPublish 为 false

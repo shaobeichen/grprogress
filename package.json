@@ -31,12 +31,7 @@
         "bubbletea",
         "bubble"
     ],
-    "optionalDependencies": {
-        "@grprogress/darwin-arm64": "1.0.0",
-        "@grprogress/darwin-x64": "1.0.0",
-        "@grprogress/linux-x64": "1.0.0",
-        "@grprogress/win32-x64": "1.0.0"
-    },
+    "optionalDependencies": {},
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/commit-analyzer": "^13.0.0",

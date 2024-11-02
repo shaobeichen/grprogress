@@ -17,6 +17,7 @@ function getPackageInfoByCurrentPlatform() {
     platform: os.platform(),
     arch: os.arch(),
     dirName: dirName,
+    packages: Object.values(packages),
   }
 }
 
