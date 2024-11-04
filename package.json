@@ -1,50 +1,13 @@
 {
     "name": "grprogress",
     "version": "1.6.0",
-    "description": "a gradient progress for nodejs by go",
-    "private": false,
-    "main": "./src/index.js",
     "scripts": {
-        "postinstall": "node install.js",
-        "dev": "npm run build && node ./src/dev.js",
-        "dev:go": "go run . 0.8",
-        "build": "node ./scripts/build.js"
+        "postinstall": "node install.js"
     },
-    "files": [
-        "install.js",
-        "src",
-        "utils"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/shaobeichen/grprogress.git"
-    },
-    "homepage": "https://github.com/shaobeichen/grprogress#readme",
-    "author": "shaobeichen",
-    "keywords": [
-        "progress",
-        "progressbar",
-        "progress-bar",
-        "go",
-        "cli",
-        "gradient",
-        "bubbletea",
-        "bubble"
-    ],
     "optionalDependencies": {
         "@grprogress/darwin-arm64": "1.6.0",
         "@grprogress/darwin-x64": "1.6.0",
         "@grprogress/linux-x64": "1.6.0",
         "@grprogress/win32-x64": "1.6.0"
-    },
-    "devDependencies": {
-        "@semantic-release/changelog": "^6.0.3",
-        "@semantic-release/commit-analyzer": "^13.0.0",
-        "@semantic-release/exec": "^6.0.3",
-        "@semantic-release/git": "^10.0.1",
-        "@semantic-release/github": "^10.3.4",
-        "@semantic-release/npm": "^12.0.1",
-        "@semantic-release/release-notes-generator": "^14.0.1",
-        "semantic-release": "^24.1.1"
     }
 }
