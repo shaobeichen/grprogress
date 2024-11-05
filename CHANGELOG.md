@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/shaobeichen/grprogress/compare/v1.6.0...v1.6.1) (2024-11-05)
+
+
+### Bug Fixes
+
+* update go version ([bbd8cb5](https://github.com/shaobeichen/grprogress/commit/bbd8cb557038333cdc82aee5c09049e452891a4e))
+
 # [1.6.0](https://github.com/shaobeichen/grprogress/compare/v1.5.0...v1.6.0) (2024-11-02)
 
 
