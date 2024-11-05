@@ -1,6 +1,6 @@
 module grprogress
 
-go 1.22.4
+go 1.22.1
 
 require (
 	github.com/charmbracelet/bubbletea v1.1.1
