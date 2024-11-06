@@ -1,6 +1,6 @@
 {
     "name": "grprogress",
-    "version": "1.6.4",
+    "version": "1.6.5",
     "description": "a gradient progress for nodejs by go",
     "private": false,
     "publishConfig": {
@@ -40,10 +40,10 @@
         "napi"
     ],
     "optionalDependencies": {
-        "@grprogress/darwin-arm64": "1.6.4",
-        "@grprogress/darwin-x64": "1.6.4",
-        "@grprogress/linux-x64": "1.6.4",
-        "@grprogress/win32-x64": "1.6.4"
+        "@grprogress/darwin-arm64": "1.6.5",
+        "@grprogress/darwin-x64": "1.6.5",
+        "@grprogress/linux-x64": "1.6.5",
+        "@grprogress/win32-x64": "1.6.5"
     },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
