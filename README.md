@@ -16,8 +16,8 @@
 </a>
 
 <br>
-
-<img src="./demo.gif" width="50%" alt="Example">
+<br>
+<img src="./demo.gif" width="60%" alt="Example">
 
 ## 安装
 
