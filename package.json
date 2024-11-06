@@ -4,8 +4,7 @@
     "description": "a gradient progress for nodejs by go",
     "private": false,
     "publishConfig": {
-        "access": "public",
-        "provenance": true
+        "access": "public"
     },
     "main": "./src/index.js",
     "scripts": {
