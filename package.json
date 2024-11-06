@@ -30,13 +30,15 @@
     "author": "shaobeichen",
     "keywords": [
         "progress",
-        "progressbar",
-        "progress-bar",
         "go",
+        "golang",
         "cli",
         "gradient",
         "bubbletea",
-        "bubble"
+        "rust",
+        "rspack",
+        "node",
+        "napi"
     ],
     "optionalDependencies": {
         "@grprogress/darwin-arm64": "1.6.2",
