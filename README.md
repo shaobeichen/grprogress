@@ -136,6 +136,10 @@ release.js 中还包含更新主包 optionalDependencies 中平台包名称及�
 
 这样就达到了 npm 包里并没有二进制文件，安装后可以运行二进制文件的逻辑。
 
+### 其他语言
+
+我们使用 Go 来实现，其他语言也是类似逻辑，比如目前 Rust 语言来实现 Nodejs 的工具库，比如 rspack，采用的方式也是大同小异。
+
 ## 参考
 
 [渐变进度条 Go 库 BubbleTea - 非常适合简单和复杂的终端应用](https://github.com/charmbracelet/bubbletea)
