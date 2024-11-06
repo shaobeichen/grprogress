@@ -112,7 +112,7 @@ progress.update(0.8)
 
 release.js 中还包含更新主包 optionalDependencies 中平台包名称及版本号等逻辑，稍后详细解释其作用。
 
-### 4.安装主包，自动安装对应平台包
+#### 4.安装主包，自动安装对应平台包
 
 我们参考 esbuild 的安装逻辑，在 npm install grprogress 时，会自动安装对应平台的平台包，比如在 Windows 下 npm install grprogress 会自动安装 @grprogress/win32-x64 平台包。
 
