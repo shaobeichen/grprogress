@@ -17,7 +17,7 @@
 
 <br>
 <br>
-<img src="./demo.gif" width="60%" alt="Example">
+<img src=".//images/demo.gif" width="60%" alt="Example">
 
 ## 安装
 
