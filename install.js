@@ -61,7 +61,7 @@ function installUsingNPM(pkg, subpath, binPath) {
  * 通过https下载tgz安装依赖
  */
 function thirdInstall(pkg, subpath, binPath) {
-  // https://registry.npmjs.com/@grprogress/windows-amd64/-/windows-amd64-1.0.0.tgz
+  // https://registry.npmjs.com/@grprogress/win32-x64/-/win32-x64-1.6.0.tgz
   // 下载压缩包 -> 解压压缩包 -> 删除压缩包 -> 移动指定的文件 -> 删除文件夹
 }
 

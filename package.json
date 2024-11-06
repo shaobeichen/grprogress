@@ -15,6 +15,9 @@
         "src",
         "utils"
     ],
+    "engines": {
+        "node": ">=12"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/shaobeichen/grprogress.git"
