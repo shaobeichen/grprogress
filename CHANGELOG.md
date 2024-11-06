@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/shaobeichen/grprogress/compare/v1.6.3...v1.6.4) (2024-11-06)
+
+
+### Bug Fixes
+
+* update doc content ([892d632](https://github.com/shaobeichen/grprogress/commit/892d63245a0ad457e0f4ec5c5a453e5e6c2a16c4))
+
 ## [1.6.3](https://github.com/shaobeichen/grprogress/compare/v1.6.2...v1.6.3) (2024-11-06)
 
 
