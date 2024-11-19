@@ -140,9 +140,13 @@ release.js 中还包含更新主包 optionalDependencies 中平台包名称及�
 
 这样就达到了 npm 包里并没有二进制文件，安装后可以运行二进制文件的逻辑。
 
-### 其他语言
+### 其他语言是如何实现的？
 
 我们使用 Go 来实现，其他语言也是类似逻辑，比如目前 Rust 语言来实现 Nodejs 的工具库，例如 rspack，采用的方式也是大同小异。@rspack/core 里依赖了@rspack/binding，@rspack/binding 分发了很多平台包，安装的逻辑在[binding.js](https://www.npmjs.com/package/@rspack/binding?activeTab=code)。
+
+### 没有用到 wasm 吗？
+
+因为 Go 语言本身就支持跨平台，所以不需要用到 wasm，有一种情况需要特殊处理，就是 android，android 需要使用 wasm。
 
 ## 参考
 
